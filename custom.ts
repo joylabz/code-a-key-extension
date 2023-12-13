@@ -19,8 +19,8 @@ enum MouseButtons {
     RIGHT = 5
 }
 
-//% groups=['Keyboard', 'Mouse', 'Events']
-//% weight=100 color=#0fbc11 icon="\uf11c"
+//% groups=['Keyboard', 'Mouse', 'Events', 'Advanced']
+//% weight=100 color=#0fbc11 icon="\uf11c" black="Makey Makey"
 namespace MakeyMakey {
     let dir_a = 0
     let SX1509_ADDRESS = 0
@@ -51,7 +51,7 @@ namespace MakeyMakey {
             SX1509_ADDRESS,
             (REG_DIR_A << 8) | 0x00, 
             NumberFormat.UInt16BE,
-            false
+            false 
         )
 
         pins.i2cWriteNumber(
@@ -163,7 +163,7 @@ namespace MakeyMakey {
     }
 
     //%group="Keyboard"
-    //% weight=50
+    //% weight=90
     //% advanced=true
     //% block="release key %key"
     export function release(key: Key): void {
@@ -173,26 +173,26 @@ namespace MakeyMakey {
     //%group="Mouse"
     //% weight=100
     //% advanced=true
-    //% block="move mouse %direction"
+    //% block="begin moving mouse %direction"
     export function moveMouse(direction: MouseDirections): void {
         sx1509_digitalWrite(direction, false);
     }
     //%group="Mouse"
-    //% weight=50
+    //% weight=90
     //% advanced=true
     //% block="stop mouse %direction"
     export function stopMouse(direction: MouseDirections): void {
         sx1509_digitalWrite(direction, true);
     }
     //%group="Mouse"
-    //% weight=100
+    //% weight=200
     //% advanced=true
     //% block="press mouse button %button"
     export function pressMouseButton(button: MouseButtons): void {
         sx1509_digitalWrite(button, false);
     }
-        //%group="Mouse"
-    //% weight=100
+    //%group="Mouse"
+    //% weight=150
     //% advanced=true
     //% block="release mouse button %button"
     export function releaseMouseButton(button: MouseButtons): void {
@@ -200,7 +200,6 @@ namespace MakeyMakey {
     }
     //%group="Mouse"
     //% weight=100
-    //% advanced=true
     //% block="click mouse button %button"
     export function clickMouse(button: MouseButtons): void {
         pressMouseButton(button);
@@ -208,7 +207,8 @@ namespace MakeyMakey {
         releaseMouseButton(button);
         basic.pause(DEBOUNCE_TIME);
     }
-        //%group="Mouse"
+
+    //%group="Mouse"
     //% block="move mouse %direction|for %seconds|seconds"
     //% seconds.shadow=timePicker
     export function moveMouseForSeconds(direction: MouseDirections, seconds: number): void {
@@ -218,6 +218,8 @@ namespace MakeyMakey {
         basic.pause(DEBOUNCE_TIME);
     }
     //% advanced=true
+    //% group="Advanced"
+    //% weight=0
     //% block="set debounce %ms"
     export function setDebounce(ms: number): void {
         DEBOUNCE_TIME = ms;
@@ -234,6 +236,7 @@ namespace MakeyMakey {
         onKeyPressedHandler = handler;
     }
     //%group="Mouse"
+    //% weight=80
     //% block="when Makey Makey mouse clicked"
     export function whenMouseClicked(handler: () => void): void {
         onMouseClickedHandler = handler;
