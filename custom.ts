@@ -145,6 +145,7 @@ namespace MakeyMakey {
     }
 
     //%group="Keyboard"
+    //% weight=100
     //% block="press and release key %key"
     export function typeKey(key: Key): void {
         pressKey(key);
@@ -153,37 +154,53 @@ namespace MakeyMakey {
         basic.pause(DEBOUNCE_TIME);
     }
 
+    //%group="Keyboard"
+    //% weight=100
+    //% advanced=true
     //% block="press key %key"
     export function pressKey(key: Key): void {
         sx1509_digitalWrite(key, false);
     }
 
+    //%group="Keyboard"
+    //% weight=50
+    //% advanced=true
     //% block="release key %key"
     export function release(key: Key): void {
         sx1509_digitalWrite(key, true);
     }
 
     //%group="Mouse"
+    //% weight=100
+    //% advanced=true
     //% block="move mouse %direction"
     export function moveMouse(direction: MouseDirections): void {
         sx1509_digitalWrite(direction, false);
     }
-
+    //%group="Mouse"
+    //% weight=50
+    //% advanced=true
     //% block="stop mouse %direction"
     export function stopMouse(direction: MouseDirections): void {
         sx1509_digitalWrite(direction, true);
     }
-
+    //%group="Mouse"
+    //% weight=100
+    //% advanced=true
     //% block="press mouse button %button"
     export function pressMouseButton(button: MouseButtons): void {
         sx1509_digitalWrite(button, false);
     }
-
+        //%group="Mouse"
+    //% weight=100
+    //% advanced=true
     //% block="release mouse button %button"
     export function releaseMouseButton(button: MouseButtons): void {
         sx1509_digitalWrite(button, true);
     }
-
+    //%group="Mouse"
+    //% weight=100
+    //% advanced=true
     //% block="click mouse button %button"
     export function clickMouse(button: MouseButtons): void {
         pressMouseButton(button);
@@ -191,6 +208,7 @@ namespace MakeyMakey {
         releaseMouseButton(button);
         basic.pause(DEBOUNCE_TIME);
     }
+        //%group="Mouse"
     //% block="move mouse %direction|for %seconds|seconds"
     //% seconds.shadow=timePicker
     export function moveMouseForSeconds(direction: MouseDirections, seconds: number): void {
@@ -199,7 +217,7 @@ namespace MakeyMakey {
         stopMouse(direction);
         basic.pause(DEBOUNCE_TIME);
     }
-
+    //% advanced=true
     //% block="set debounce %ms"
     export function setDebounce(ms: number): void {
         DEBOUNCE_TIME = ms;
@@ -211,10 +229,11 @@ namespace MakeyMakey {
     let onMouseClickedHandler: () => void;
 
     //% block="when Makey Makey key pressed"
+        //%group="Keyboard"
     export function whenKeyPressed(handler: () => void): void {
         onKeyPressedHandler = handler;
     }
-
+    //%group="Mouse"
     //% block="when Makey Makey mouse clicked"
     export function whenMouseClicked(handler: () => void): void {
         onMouseClickedHandler = handler;
