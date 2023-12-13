@@ -20,7 +20,7 @@ enum MouseButtons {
 }
 
 //% groups=['Keyboard', 'Mouse', 'Events']
-//% weight=100 color=#0fbc11 icon="\uf11b"
+//% weight=100 color=#0fbc11 icon="\uf11c"
 namespace MakeyMakey {
     let dir_a = 0
     let SX1509_ADDRESS = 0
@@ -162,7 +162,7 @@ namespace MakeyMakey {
     export function release(key: Key): void {
         sx1509_digitalWrite(key, true);
     }
-    
+
     //%group="Mouse"
     //% block="move mouse %direction"
     export function moveMouse(direction: MouseDirections): void {
