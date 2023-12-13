@@ -20,7 +20,7 @@ enum MouseButtons {
 }
 
 //% groups=['Keyboard', 'Mouse', 'Events']
-//% weight=100 color=#0fbc11 icon=""
+//% weight=100 color=#0fbc11 icon="\uf11b"
 namespace MakeyMakey {
     let dir_a = 0
     let SX1509_ADDRESS = 0
