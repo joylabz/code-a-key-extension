@@ -178,7 +178,7 @@ namespace MakeyMakey {
     //% weight=90
     //% advanced=true
     //% block="release key %key"
-    export function release(KeyRelease: key): void {
+    export function release(key: KeyRelease): void {
         if (key === KeyRelease.ALL) {
             for (let i = 8; i < 14; i++) {
                 sx1509_digitalWrite(i, true);
