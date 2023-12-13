@@ -142,6 +142,8 @@ namespace MakeyMakey {
             false
         )
     }
+
+    //%category="Keyboard"
     //% block="type key %key"
     export function typeKey(key: Key): void {
         pressKey(key);
@@ -219,9 +221,7 @@ namespace MakeyMakey {
 
 
 
-    // Helper function to read digital input from SX1509 pins
-    //% block="digitalRead sx1509 pin %pin"
-    export function sx1509_digitalRead(pin: number): number {
+    function sx1509_digitalRead(pin: number): number {
         let register = pin < 8 ? REG_DATA_A : REG_DATA_B;
         pins.i2cWriteNumber(
             SX1509_ADDRESS,
