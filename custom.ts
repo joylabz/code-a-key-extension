@@ -19,6 +19,7 @@ enum MouseButtons {
     RIGHT = 5
 }
 
+//% groups=['Keyboard', 'Mouse', 'Events']
 //% weight=100 color=#0fbc11 icon=""
 namespace MakeyMakey {
     let dir_a = 0
@@ -143,7 +144,7 @@ namespace MakeyMakey {
         )
     }
 
-    //%category="Keyboard"
+    //%group="Keyboard"
     //% block="type key %key"
     export function typeKey(key: Key): void {
         pressKey(key);
