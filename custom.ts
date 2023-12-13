@@ -1,12 +1,24 @@
 let DEBOUNCE_TIME = 50
-enum Key {
+
+enum KeyPress {
     W = 13,
     A = 12,
     S = 11,
     D = 10,
     F = 9,
-    G = 8
+    G = 8,
 }
+
+enum KeyRelease {
+    W = 13,
+    A = 12,
+    S = 11,
+    D = 10,
+    F = 9,
+    G = 8,
+    ALL = 0
+}
+
 enum MouseDirections {
     UP = 0,
     DOWN = 1,
@@ -147,7 +159,7 @@ namespace MakeyMakey {
     //%group="Keyboard"
     //% weight=100
     //% block="press and release key %key"
-    export function typeKey(key: Key): void {
+    export function typeKey(key: KeyPress): void {
         pressKey(key);
         basic.pause(DEBOUNCE_TIME);
         release(key);
@@ -158,7 +170,7 @@ namespace MakeyMakey {
     //% weight=100
     //% advanced=true
     //% block="press key %key"
-    export function pressKey(key: Key): void {
+    export function pressKey(key: KeyPress): void {
         sx1509_digitalWrite(key, false);
     }
 
@@ -166,8 +178,14 @@ namespace MakeyMakey {
     //% weight=90
     //% advanced=true
     //% block="release key %key"
-    export function release(key: Key): void {
-        sx1509_digitalWrite(key, true);
+    export function release(KeyRelease: key): void {
+        if (key === KeyRelease.ALL) {
+            for (let i = 8; i < 14; i++) {
+                sx1509_digitalWrite(i, true);
+            }
+        } else {
+            sx1509_digitalWrite(key, true);
+        }
     }
 
     //%group="Mouse"
