@@ -184,7 +184,26 @@ namespace MakeyMakey {
                 sx1509_digitalWrite(i, true);
             }
         } else {
-            sx1509_digitalWrite(key, true);
+            switch (key) {
+                case KeyRelease.W:
+                    sx1509_digitalWrite(KeyPress.W, true);
+                    break;
+                case KeyRelease.A:
+                    sx1509_digitalWrite(KeyPress.A, true);
+                    break;
+                case KeyRelease.S:
+                    sx1509_digitalWrite(KeyPress.S, true);
+                    break;
+                case KeyRelease.D:
+                    sx1509_digitalWrite(KeyPress.D, true);
+                    break;
+                case KeyRelease.F:
+                    sx1509_digitalWrite(KeyPress.F, true);
+                    break;
+                case KeyRelease.G:
+                    sx1509_digitalWrite(KeyPress.G, true);
+                    break;
+            }
         }
     }
 
