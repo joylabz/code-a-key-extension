@@ -254,7 +254,7 @@ namespace MakeyMakey {
         onKeyPressedHandler = handler;
     }
     //%group="Mouse"
-    //% weight=80
+    //% weight=0
     //% block="when Makey Makey mouse clicked"
     export function whenMouseClicked(handler: () => void): void {
         onMouseClickedHandler = handler;
