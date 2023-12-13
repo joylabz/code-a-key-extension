@@ -145,7 +145,7 @@ namespace MakeyMakey {
     }
 
     //%group="Keyboard"
-    //% block="type key %key"
+    //% block="press and release key %key"
     export function typeKey(key: Key): void {
         pressKey(key);
         basic.pause(DEBOUNCE_TIME);
@@ -162,7 +162,8 @@ namespace MakeyMakey {
     export function release(key: Key): void {
         sx1509_digitalWrite(key, true);
     }
-
+    
+    //%group="Mouse"
     //% block="move mouse %direction"
     export function moveMouse(direction: MouseDirections): void {
         sx1509_digitalWrite(direction, false);
