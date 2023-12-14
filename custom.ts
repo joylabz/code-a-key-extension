@@ -162,7 +162,26 @@ namespace MakeyMakey {
     export function typeKey(key: KeyPress): void {
         pressKey(key);
         basic.pause(DEBOUNCE_TIME);
-        release(key);
+        switch (key) {
+            case KeyPress.W:
+                release(KeyRelease.W);
+                break;
+            case KeyPress.A:
+                release(KeyRelease.A);
+                break;
+            case KeyPress.S:
+                release(KeyRelease.S);
+                break;
+            case KeyPress.D:
+                release(KeyRelease.D);
+                break;
+            case KeyPress.F:
+                release(KeyRelease.F);
+                break;
+            case KeyPress.G:
+                release(KeyRelease.G);
+                break;
+        }
         basic.pause(DEBOUNCE_TIME);
     }
 
