@@ -9,6 +9,6 @@ This is an extension which allows you to use the [Makey Makey](https://www.makey
 
 ### makeymakey-sx1509_init
 
-![block-images/initialize.png]
+![Initialize Makey Makey block](./block-images/initialize.png)
 
 This block initializes the Code-a-Key backpack and the Makey Makey and *must be used* before any of the other blocks will work.  You will almost always put this at the top of your `On Start` event block.
