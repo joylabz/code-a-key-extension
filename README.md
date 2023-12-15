@@ -7,10 +7,12 @@ This is an extension which allows you to use the [Makey Makey](https://www.makey
 
 ## Basic Blocks
 
-* ![Initialize Makey Makey block](./block-images/initialize.png)
+![Initialize Makey Makey block](./block-images/initialize.png)
+
 This block initializes the Code-a-Key backpack and the Makey Makey and *must be used* before any of the other blocks will work.  You will almost always put this at the top of your `On Start` event block.
 
-* ![Press and Release Key block](./block-images/press-and-release-key.png)
+![Press and Release Key block](./block-images/press-and-release-key.png)
+
 This block causes the Makey Makey to trigger a key-press of the selected key followed by a key-release with a brief delay between them.  When you type a key on the keyboard it sends 2 events to the computer:
 * key *press* when you press the key down  
 * key *release* when you let the key come bakc up. 
@@ -19,10 +21,11 @@ This block combines both of these events in one block for ease of use.
 
 By default the delay between press and release will be 50ms but it can be adjusted using the `Set Debounce` block in the *advanced* section.
 
-* ![When Key Pressed block](./block-images/when-key-pressed.png)
+![When Key Pressed block](./block-images/when-key-pressed.png)
+
 This is an *event* block that is triggered whenever the Makey Makey sends a key-press to the computer.  This block cannot distinguish between different Makey Makey keys and triggers for all of them.
 
-* ![Click Mouse Button block](./block-images/click-mouse-button.png)
+![Click Mouse Button block](./block-images/click-mouse-button.png)
 This block causes the Makey Makey to trigger a mouse-click of the selected mouse-button.  A mouse-click consists of two distinct events with a brief delay between them.
 * a mouse *down* event when you press the mouse button
 * a mouse *up* event when you release the mouse button
@@ -31,10 +34,12 @@ This block combines both of these events in one block for ease of use.
 
 By default the delay between press and release will be 50ms but it can be adjusted using the `Set Debounce` block in the *advanced* section.
 
-* ![Move Mouse for seconds block](./block-images/move-mouse.png)
+![Move Mouse for seconds block](./block-images/move-mouse.png)
+
 This block causes the Makey Makey to move the mouse-cursor in the selected direction for the chosen amount of time.  This block will cause code execution to stop during the mouse-movement.
 
-* ![When Makey Makey Mouse clicked block](./block-images/when-mouse-clicked.png)
+![When Makey Makey Mouse clicked block](./block-images/when-mouse-clicked.png)
+
 This is an *event* block that is triggered whenever the Makey Makey sends a mouse-click to the computer.  This block cannot distinguish between the LEFT and RIGHT mouse buttons and triggers for both of them.
 
 ## Advanced Blocks
