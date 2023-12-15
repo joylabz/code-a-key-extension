@@ -1,6 +1,6 @@
 {
-    "name": "Makey Makey Extension Prototype",
-    "description": "",
+    "name": "Makey Makey Code-a-Key Extension",
+    "description": "An extension to allow you to use the Makey Makey Code-a-Key backpack with the BBC micro:bit",
     "dependencies": {
         "core": "*",
         "radio": "*",

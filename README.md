@@ -1,31 +1,14 @@
+# Makey Makey Code-a-Key MakeCode Package
 
-> Open this page at [https://wmacfarl.github.io/makey-makey-extension-prototype/](https://wmacfarl.github.io/makey-makey-extension-prototype/)
+This is an extension which allows you to use the [Makey Makey](https://www.makeymakey.com) with the micro:bit through the [Code-a-Key backpack](https://www.makeymakey.com).  The Code-a-Key backpack allows you to:
 
-## Use as Extension
+* Program the micro:bit to send keyboard and mouse input to a computer through the attached Makey Makey
+* Program the micro:bit to respond to *key presses* and *mouse clicks* triggerd by the Makey Makey
 
-This repository can be added as an **extension** in MakeCode.
+## Blocks
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/wmacfarl/makey-makey-extension-prototype** and import
+### makeymakey-sx1509_init
 
-## Edit this project ![Build status badge](https://github.com/wmacfarl/makey-makey-extension-prototype/workflows/MakeCode/badge.svg)
+![block-images/initialize.png]
 
-To edit this repository in MakeCode.
-
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/wmacfarl/makey-makey-extension-prototype** and click import
-
-## Blocks preview
-
-This image shows the blocks code from the last commit in master.
-This image may take a few minutes to refresh.
-
-![A rendered view of the blocks](https://github.com/wmacfarl/makey-makey-extension-prototype/raw/master/.github/makecode/blocks.png)
-
-#### Metadata (used for search, rendering)
-
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+This block initializes the Code-a-Key backpack and the Makey Makey and *must be used* before any of the other blocks will work.  You will almost always put this at the top of your `On Start` event block.
