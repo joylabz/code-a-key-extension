@@ -180,7 +180,7 @@ namespace MakeyMakey {
 
     //%group="Keyboard"
     //% advanced=true
-    //% weight=100
+    //% weight=0
     //% block="any Makey Makey key pressed"
     export function anyKeyPressed(): boolean {
         return keyPressed;
@@ -231,7 +231,7 @@ namespace MakeyMakey {
 
     //reporter function for the mouseClicked boolean state
     //%group="Mouse"
-    //% weight=100
+    //% weight=0
     //% advanced=true
     //% block="any Makey Makey mouse button pressed"
     export function anyMouseClicked(): boolean {
@@ -310,6 +310,7 @@ namespace MakeyMakey {
 
     //% block="when all Makey Makey %event"
     //% group="Events"
+    //% advanced=true
     //% weight=0
     export function onReleaseEvent(event: MakeyMakeyReleaseEventTypes, handler: () => void): void {
         if (event === MakeyMakeyReleaseEventTypes.KeyReleased) {
