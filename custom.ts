@@ -236,7 +236,7 @@ namespace MakeyMakey {
     export function anyMouseClicked(): boolean {
         return mouseClicked;
     }
-    
+
     //%group="Mouse"
     //% weight=90
     //% advanced=true
@@ -294,7 +294,7 @@ namespace MakeyMakey {
     let onMouseReleasedHandler: () => void;
     let allReleasedHandler: () => void;
 
-    //% block = "when Makey Makey %event"
+    //% block= when Makey Makey %event"
     //% group="Events"
     //% weight=0
     export function onPressEvent(event: MakeyMakeyPressEventTypes, handler: () => void): void {
@@ -307,7 +307,7 @@ namespace MakeyMakey {
         }
     }
 
-    //% block = "when all Makey Makey %event"
+    //% block="when all Makey Makey %event"
     //% group="Events"
     //% weight=0
     export function onReleaseEvent(event: MakeyMakeyReleaseEventTypes, handler: () => void): void {
