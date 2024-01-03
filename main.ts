@@ -1,4 +1,3 @@
-basic.pause(1000)
 MakeyMakey.sx1509_init()
 MakeyMakey.typeKey(KeyPress.W)
 MakeyMakey.typeKey(KeyPress.A)

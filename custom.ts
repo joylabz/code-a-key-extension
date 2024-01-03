@@ -1,5 +1,23 @@
 let DEBOUNCE_TIME = 50
 
+enum MakeyMakeyPressEventTypes {
+    //% block="key pressed"
+    KeyPressed = 1,
+    //% block="mouse clicked"
+    MouseClicked = 2,
+    //% block="key pressed+mouse clicked"
+    BothPressed = 3
+}
+
+enum MakeyMakeyReleaseEventTypes {
+    //% block="keys released"
+    KeyReleased = 1,
+    //% block="mouse buttons released"
+    MouseReleased = 2,
+    //% block="keys+mouse buttons released"
+    AllReleased = 3
+}
+
 enum KeyPress {
     W = 13,
     A = 12,
@@ -47,11 +65,15 @@ namespace MakeyMakey {
     let REG_INPUT_DISABLE_A = 7;
     let REG_INPUT_DISABLE_B = 6;
 
+    let keyPressed = false;
+    let mouseClicked = false;
+
+
+
     //% block="Initialize MakeyMakey"
     export function sx1509_init() {
         sx1509_reset();
-        basic.pause(500)
-    //    setForInput()
+        basic.pause(100)
         pins.i2cWriteNumber(
             SX1509_ADDRESS,
             (REG_DIR_B << 8) | 0xC0,
@@ -78,43 +100,6 @@ namespace MakeyMakey {
             NumberFormat.UInt16BE,
             false
         )
-    }
-
-
-    function setForInput(){
-        dir_a = 16383
-        pins.i2cWriteNumber(
-            SX1509_ADDRESS,
-            (REG_DIR_A << 8) | (dir_a >> 8),
-            NumberFormat.UInt16BE,
-            false
-        )
-        /*
-        pins.i2cWriteNumber(
-            SX1509_ADDRESS,
-            (REG_DIR_B << 8) | 0xFF, // Set all pins in the B register as inputs
-            NumberFormat.UInt16BE,
-            false
-        )
-        */
-    }
-
-    function setForOutput(){
-        pins.i2cWriteNumber(
-            SX1509_ADDRESS,
-            (REG_DIR_A << 8) | 0x00,
-            NumberFormat.UInt16BE,
-            false
-        )
-        /*
-        pins.i2cWriteNumber(
-            SX1509_ADDRESS,
-            (REG_DIR_B << 8) | 0x00,
-            NumberFormat.UInt16BE,
-            false
-        )
-        */
-   
     }
 
     function sx1509_reset() {
@@ -193,6 +178,16 @@ namespace MakeyMakey {
         sx1509_digitalWrite(key, false);
     }
 
+    // reporter function for the keyPressed boolena state
+    //%group="Keyboard"
+    //% weight=100
+    //% block="any Makey Makey key pressed"
+    export function anyKeyPressed(): boolean {
+        return keyPressed;
+    }
+
+
+
     //%group="Keyboard"
     //% weight=90
     //% advanced=true
@@ -233,6 +228,15 @@ namespace MakeyMakey {
     export function moveMouse(direction: MouseDirections): void {
         sx1509_digitalWrite(direction, false);
     }
+
+    //reporter function for the mouseClicked boolean state
+    //%group="Mouse"
+    //% weight=100
+    //% block="any Makey Makey mouse button pressed"
+    export function anyMouseClicked(): boolean {
+        return mouseClicked;
+    }
+    
     //%group="Mouse"
     //% weight=90
     //% advanced=true
@@ -285,9 +289,39 @@ namespace MakeyMakey {
     // Event handlers
     let onKeyPressedHandler: () => void;
     let onMouseClickedHandler: () => void;
+    let bothPressedHandler: () => void;
+    let onKeyReleasedHandler: () => void;
+    let onMouseReleasedHandler: () => void;
+    let allReleasedHandler: () => void;
+
+    //% block = "when Makey Makey %event"
+    //% group="Events"
+    //% weight=0
+    export function onPressEvent(event: MakeyMakeyPressEventTypes, handler: () => void): void {
+        if (event === MakeyMakeyPressEventTypes.KeyPressed) {
+            onKeyPressedHandler = handler;
+        } else if (event === MakeyMakeyPressEventTypes.MouseClicked) {
+            onMouseClickedHandler = handler;
+        } else if (event === MakeyMakeyPressEventTypes.BothPressed) {
+            bothPressedHandler = handler;
+        }
+    }
+
+    //% block = "when all Makey Makey %event"
+    //% group="Events"
+    //% weight=0
+    export function onReleaseEvent(event: MakeyMakeyReleaseEventTypes, handler: () => void): void {
+        if (event === MakeyMakeyReleaseEventTypes.KeyReleased) {
+            onKeyReleasedHandler = handler;
+        } else if (event === MakeyMakeyReleaseEventTypes.MouseReleased) {
+            onMouseReleasedHandler = handler;
+        } else if (event === MakeyMakeyReleaseEventTypes.AllReleased) {
+            allReleasedHandler = handler;
+        }
+    }
 
     //% block="when Makey Makey key pressed"
-        //%group="Keyboard"
+    //%group="Keyboard"
     export function whenKeyPressed(handler: () => void): void {
         onKeyPressedHandler = handler;
     }
@@ -323,18 +357,35 @@ namespace MakeyMakey {
 
         while (true) {
             //setForInput()
-            const keyPressed = sx1509_digitalRead(14) === 1;
-            const mouseClicked = sx1509_digitalRead(15) === 1;
+            keyPressed = sx1509_digitalRead(14) === 1;
+            mouseClicked = sx1509_digitalRead(15) === 1;
           //  setForOutput()
             //console.log(`keyPressed: ${keyPressed}`);
 
             if (!prevKeyPressedState && keyPressed && onKeyPressedHandler) {
                 onKeyPressedHandler();
-            }
+            } 
 
             if (!prevMouseClickedState && mouseClicked && onMouseClickedHandler) {
                 onMouseClickedHandler();
             }
+
+            if (!prevKeyPressedState && !prevMouseClickedState && keyPressed && mouseClicked && bothPressedHandler) {
+                bothPressedHandler();
+            }
+
+            if (prevKeyPressedState && prevMouseClickedState && !keyPressed && !mouseClicked && allReleasedHandler) {
+                allReleasedHandler();
+            }
+
+            if (prevKeyPressedState && !keyPressed && onKeyReleasedHandler) {
+                onKeyReleasedHandler();
+            }
+
+            if (prevMouseClickedState && !mouseClicked && onMouseReleasedHandler) {
+                onMouseReleasedHandler();
+            }
+            
 
             prevKeyPressedState  = keyPressed;
             prevMouseClickedState = mouseClicked;
