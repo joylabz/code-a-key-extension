@@ -178,8 +178,8 @@ namespace MakeyMakey {
         sx1509_digitalWrite(key, false);
     }
 
-    // reporter function for the keyPressed boolena state
     //%group="Keyboard"
+    //% advanced=true
     //% weight=100
     //% block="any Makey Makey key pressed"
     export function anyKeyPressed(): boolean {
@@ -232,6 +232,7 @@ namespace MakeyMakey {
     //reporter function for the mouseClicked boolean state
     //%group="Mouse"
     //% weight=100
+    //% advanced=true
     //% block="any Makey Makey mouse button pressed"
     export function anyMouseClicked(): boolean {
         return mouseClicked;
