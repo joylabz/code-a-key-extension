@@ -4,7 +4,7 @@
 //% groups=['Keyboard', 'Mouse', 'Events', 'Advanced']
 //% weight=100 color=#f50019 icon="\uf11c" block="Makey Makey"
 namespace MakeyMakey {
-    enum MakeyMakeyPressEventTypes {
+    export enum MakeyMakeyPressEventTypes {
         //% block="key pressed"
         KeyPressed = 1,
         //% block="mouse clicked"
@@ -13,7 +13,7 @@ namespace MakeyMakey {
         BothPressed = 3
     }
 
-    enum MakeyMakeyReleaseEventTypes {
+    export enum MakeyMakeyReleaseEventTypes {
         //% block="keys released"
         KeyReleased = 1,
         //% block="mouse buttons released"
@@ -22,7 +22,7 @@ namespace MakeyMakey {
         AllReleased = 3
     }
 
-    enum KeyPress {
+    export enum KeyPress {
         W = 13,
         A = 12,
         S = 11,
@@ -31,7 +31,7 @@ namespace MakeyMakey {
         G = 8,
     }
 
-    enum KeyRelease {
+    export enum KeyRelease {
         W = 13,
         A = 12,
         S = 11,
@@ -41,14 +41,14 @@ namespace MakeyMakey {
         ALL = 0
     }
 
-    enum MouseDirections {
+    export  enum MouseDirections {
         UP = 0,
         DOWN = 1,
         LEFT = 2,
         RIGHT = 3
     }
 
-    enum MouseButtons {
+    export enum MouseButtons {
         LEFT = 4,
         RIGHT = 5
     }
