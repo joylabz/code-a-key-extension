@@ -71,8 +71,20 @@ namespace MakeyMakey {
 
     //% block="Initialize MakeyMakey"
     export function sx1509_init() {
-        sx1509_reset();
-        basic.pause(100)
+        REG_RESET = 125
+        pins.i2cWriteNumber(
+            SX1509_ADDRESS,
+            (REG_RESET << 8) | 0x12,
+            NumberFormat.UInt16BE,
+            false
+        )
+        pins.i2cWriteNumber(
+            SX1509_ADDRESS,
+            (REG_RESET << 8) | 0x34,
+            NumberFormat.UInt16BE,
+            false
+        )
+                basic.pause(100)
         pins.i2cWriteNumber(
             SX1509_ADDRESS,
             (REG_DIR_B << 8) | 0xC0,
@@ -103,19 +115,7 @@ namespace MakeyMakey {
     }
 
     function sx1509_reset() {
-        REG_RESET = 125
-        pins.i2cWriteNumber(
-            SX1509_ADDRESS,
-            (REG_RESET << 8) | 0x12,
-            NumberFormat.UInt16BE,
-            false
-        )
-        pins.i2cWriteNumber(
-            SX1509_ADDRESS,
-            (REG_RESET << 8) | 0x34,
-            NumberFormat.UInt16BE,
-            false
-        )
+     
     }
 
     function sx1509_digitalWrite(pin: number, state: boolean) {
