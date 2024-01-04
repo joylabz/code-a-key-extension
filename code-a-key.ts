@@ -341,6 +341,49 @@ namespace MakeyMakey {
     }
 
 
-   
+    // Background loop checking for pin input
+    control.inBackground(() => {
+
+        let prevKeyPressedState = false;
+        let prevMouseClickedState = false;
+
+        while (true && isInitalized) {
+            //setForInput()
+            keyPressed = sx1509_digitalRead(14) === 1;
+            mouseClicked = sx1509_digitalRead(15) === 1;
+            //  setForOutput()
+            //console.log(`keyPressed: ${keyPressed}`);
+
+            if (!prevKeyPressedState && keyPressed && onKeyPressedHandler) {
+                onKeyPressedHandler();
+            }
+
+            if (!prevMouseClickedState && mouseClicked && onMouseClickedHandler) {
+                onMouseClickedHandler();
+            }
+
+            if (!prevKeyPressedState && !prevMouseClickedState && keyPressed && mouseClicked && bothPressedHandler) {
+                bothPressedHandler();
+            }
+
+            if (prevKeyPressedState && prevMouseClickedState && !keyPressed && !mouseClicked && allReleasedHandler) {
+                allReleasedHandler();
+            }
+
+            if (prevKeyPressedState && !keyPressed && onKeyReleasedHandler) {
+                onKeyReleasedHandler();
+            }
+
+            if (prevMouseClickedState && !mouseClicked && onMouseReleasedHandler) {
+                onMouseReleasedHandler();
+            }
+
+
+            prevKeyPressedState = keyPressed;
+            prevMouseClickedState = mouseClicked;
+
+            basic.pause(20)
+        }
+    });
 
 }

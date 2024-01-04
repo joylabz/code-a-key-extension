@@ -2,16 +2,11 @@
     "name": "Makey Makey Code-a-Key Extension",
     "description": "An extension to allow you to use the Makey Makey Code-a-Key backpack with the BBC micro:bit",
     "dependencies": {
-        "core": "*",
-        "radio": "*",
-        "microphone": "*",
-        "radio-broadcast": "*"
+        "core": "*"
     },
     "files": [
-        "main.blocks",
-        "main.ts",
         "README.md",
-        "custom.ts"
+        "code-a-key.ts"
     ],
     "testFiles": [
         "test.ts"
