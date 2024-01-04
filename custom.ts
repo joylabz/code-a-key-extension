@@ -1,57 +1,57 @@
 
+enum MakeyMakeyPressEventTypes {
+    //% block="key pressed"
+    KeyPressed = 1,
+    //% block="mouse clicked"
+    MouseClicked = 2,
+    //% block="key pressed+mouse clicked"
+    BothPressed = 3
+}
 
+enum MakeyMakeyReleaseEventTypes {
+    //% block="keys released"
+    KeyReleased = 1,
+    //% block="mouse buttons released"
+    MouseReleased = 2,
+    //% block="keys+mouse buttons released"
+    AllReleased = 3
+}
+
+enum KeyPress {
+    W = 13,
+    A = 12,
+    S = 11,
+    D = 10,
+    F = 9,
+    G = 8,
+}
+
+enum KeyRelease {
+    W = 13,
+    A = 12,
+    S = 11,
+    D = 10,
+    F = 9,
+    G = 8,
+    ALL = 0
+}
+
+enum MouseDirections {
+    UP = 0,
+    DOWN = 1,
+    LEFT = 2,
+    RIGHT = 3
+}
+
+enum MouseButtons {
+    LEFT = 4,
+    RIGHT = 5
+}
 
 //% groups=['Keyboard', 'Mouse', 'Events', 'Advanced']
 //% weight=100 color=#f50019 icon="\uf11c" block="Makey Makey"
 namespace MakeyMakey {
-    enum MakeyMakeyPressEventTypes {
-        //% block="key pressed"
-        KeyPressed = 1,
-        //% block="mouse clicked"
-        MouseClicked = 2,
-        //% block="key pressed+mouse clicked"
-        BothPressed = 3
-    }
-    
-    enum MakeyMakeyReleaseEventTypes {
-        //% block="keys released"
-        KeyReleased = 1,
-        //% block="mouse buttons released"
-        MouseReleased = 2,
-        //% block="keys+mouse buttons released"
-        AllReleased = 3
-    }
-    
-    enum KeyPress {
-        W = 13,
-        A = 12,
-        S = 11,
-        D = 10,
-        F = 9,
-        G = 8,
-    }
-    
-    enum KeyRelease {
-        W = 13,
-        A = 12,
-        S = 11,
-        D = 10,
-        F = 9,
-        G = 8,
-        ALL = 0
-    }
-    
-    enum MouseDirections {
-        UP = 0,
-        DOWN = 1,
-        LEFT = 2,
-        RIGHT = 3
-    }
-    
-    enum MouseButtons {
-        LEFT = 4,
-        RIGHT = 5
-    }
+   
     let DEBOUNCE_TIME = 50
 
     let SX1509_ADDRESS = 0
@@ -84,7 +84,7 @@ namespace MakeyMakey {
             NumberFormat.UInt16BE,
             false
         )
-                basic.pause(100)
+        basic.pause(100)
         pins.i2cWriteNumber(
             SX1509_ADDRESS,
             (REG_DIR_B << 8) | 0xC0,
@@ -94,9 +94,9 @@ namespace MakeyMakey {
 
         pins.i2cWriteNumber(
             SX1509_ADDRESS,
-            (REG_DIR_A << 8) | 0x00, 
+            (REG_DIR_A << 8) | 0x00,
             NumberFormat.UInt16BE,
-            false 
+            false
         )
 
         pins.i2cWriteNumber(
@@ -112,10 +112,6 @@ namespace MakeyMakey {
             false
         )
         isInitalized = true;
-    }
-
-    function sx1509_reset() {
-     
     }
 
     function sx1509_digitalWrite(pin: number, state: boolean) {
@@ -185,8 +181,6 @@ namespace MakeyMakey {
     export function anyKeyPressed(): boolean {
         return keyPressed;
     }
-
-
 
     //%group="Keyboard"
     //% weight=90
@@ -334,9 +328,6 @@ namespace MakeyMakey {
         onMouseClickedHandler = handler;
     }
 
-
-
-
     function sx1509_digitalRead(pin: number): number {
         let register = pin < 8 ? REG_DATA_A : REG_DATA_B;
         pins.i2cWriteNumber(
@@ -361,12 +352,12 @@ namespace MakeyMakey {
             //setForInput()
             keyPressed = sx1509_digitalRead(14) === 1;
             mouseClicked = sx1509_digitalRead(15) === 1;
-          //  setForOutput()
+            //  setForOutput()
             //console.log(`keyPressed: ${keyPressed}`);
 
             if (!prevKeyPressedState && keyPressed && onKeyPressedHandler) {
                 onKeyPressedHandler();
-            } 
+            }
 
             if (!prevMouseClickedState && mouseClicked && onMouseClickedHandler) {
                 onMouseClickedHandler();
@@ -387,11 +378,11 @@ namespace MakeyMakey {
             if (prevMouseClickedState && !mouseClicked && onMouseReleasedHandler) {
                 onMouseReleasedHandler();
             }
-            
 
-            prevKeyPressedState  = keyPressed;
+
+            prevKeyPressedState = keyPressed;
             prevMouseClickedState = mouseClicked;
-        
+
             basic.pause(20)
         }
     });
