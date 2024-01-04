@@ -1,57 +1,57 @@
 
+enum MakeyMakeyPressEventTypes {
+    //% block="key pressed"
+    KeyPressed = 1,
+    //% block="mouse clicked"
+    MouseClicked = 2,
+    //% block="key pressed+mouse clicked"
+    BothPressed = 3
+}
 
+enum MakeyMakeyReleaseEventTypes {
+    //% block="keys released"
+    KeyReleased = 1,
+    //% block="mouse buttons released"
+    MouseReleased = 2,
+    //% block="keys+mouse buttons released"
+    AllReleased = 3
+}
+
+enum KeyPress {
+    W = 13,
+    A = 12,
+    S = 11,
+    D = 10,
+    F = 9,
+    G = 8,
+}
+
+enum KeyRelease {
+    W = 13,
+    A = 12,
+    S = 11,
+    D = 10,
+    F = 9,
+    G = 8,
+    ALL = 0
+}
+
+enum MouseDirections {
+    UP = 0,
+    DOWN = 1,
+    LEFT = 2,
+    RIGHT = 3
+}
+
+enum MouseButtons {
+    LEFT = 4,
+    RIGHT = 5
+}
 
 //% groups=['Keyboard', 'Mouse', 'Events', 'Advanced']
 //% weight=100 color=#f50019 icon="\uf11c" block="Makey Makey"
 namespace MakeyMakey {
-    export enum MakeyMakeyPressEventTypes {
-        //% block="key pressed"
-        KeyPressed = 1,
-        //% block="mouse clicked"
-        MouseClicked = 2,
-        //% block="key pressed+mouse clicked"
-        BothPressed = 3
-    }
-
-    export enum MakeyMakeyReleaseEventTypes {
-        //% block="keys released"
-        KeyReleased = 1,
-        //% block="mouse buttons released"
-        MouseReleased = 2,
-        //% block="keys+mouse buttons released"
-        AllReleased = 3
-    }
-
-    export enum KeyPress {
-        W = 13,
-        A = 12,
-        S = 11,
-        D = 10,
-        F = 9,
-        G = 8,
-    }
-
-    export enum KeyRelease {
-        W = 13,
-        A = 12,
-        S = 11,
-        D = 10,
-        F = 9,
-        G = 8,
-        ALL = 0
-    }
-
-    export  enum MouseDirections {
-        UP = 0,
-        DOWN = 1,
-        LEFT = 2,
-        RIGHT = 3
-    }
-
-    export enum MouseButtons {
-        LEFT = 4,
-        RIGHT = 5
-    }
+    
     let DEBOUNCE_TIME = 50
 
     let SX1509_ADDRESS = 0
