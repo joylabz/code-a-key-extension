@@ -1,58 +1,59 @@
-let DEBOUNCE_TIME = 50
 
-enum MakeyMakeyPressEventTypes {
-    //% block="key pressed"
-    KeyPressed = 1,
-    //% block="mouse clicked"
-    MouseClicked = 2,
-    //% block="key pressed+mouse clicked"
-    BothPressed = 3
-}
 
-enum MakeyMakeyReleaseEventTypes {
-    //% block="keys released"
-    KeyReleased = 1,
-    //% block="mouse buttons released"
-    MouseReleased = 2,
-    //% block="keys+mouse buttons released"
-    AllReleased = 3
-}
-
-enum KeyPress {
-    W = 13,
-    A = 12,
-    S = 11,
-    D = 10,
-    F = 9,
-    G = 8,
-}
-
-enum KeyRelease {
-    W = 13,
-    A = 12,
-    S = 11,
-    D = 10,
-    F = 9,
-    G = 8,
-    ALL = 0
-}
-
-enum MouseDirections {
-    UP = 0,
-    DOWN = 1,
-    LEFT = 2,
-    RIGHT = 3
-}
-
-enum MouseButtons {
-    LEFT = 4,
-    RIGHT = 5
-}
 
 //% groups=['Keyboard', 'Mouse', 'Events', 'Advanced']
 //% weight=100 color=#f50019 icon="\uf11c" block="Makey Makey"
 namespace MakeyMakey {
-    let dir_a = 0
+    enum MakeyMakeyPressEventTypes {
+        //% block="key pressed"
+        KeyPressed = 1,
+        //% block="mouse clicked"
+        MouseClicked = 2,
+        //% block="key pressed+mouse clicked"
+        BothPressed = 3
+    }
+    
+    enum MakeyMakeyReleaseEventTypes {
+        //% block="keys released"
+        KeyReleased = 1,
+        //% block="mouse buttons released"
+        MouseReleased = 2,
+        //% block="keys+mouse buttons released"
+        AllReleased = 3
+    }
+    
+    enum KeyPress {
+        W = 13,
+        A = 12,
+        S = 11,
+        D = 10,
+        F = 9,
+        G = 8,
+    }
+    
+    enum KeyRelease {
+        W = 13,
+        A = 12,
+        S = 11,
+        D = 10,
+        F = 9,
+        G = 8,
+        ALL = 0
+    }
+    
+    enum MouseDirections {
+        UP = 0,
+        DOWN = 1,
+        LEFT = 2,
+        RIGHT = 3
+    }
+    
+    enum MouseButtons {
+        LEFT = 4,
+        RIGHT = 5
+    }
+    let DEBOUNCE_TIME = 50
+
     let SX1509_ADDRESS = 0
     let REG_RESET = 0
     let currentValue = 0
@@ -61,9 +62,7 @@ namespace MakeyMakey {
     let REG_DIR_B = 14
     let REG_DATA_A = 17
     let REG_DATA_B = 16
-    let SX1509_LED_PIN = 6
-    let REG_INPUT_DISABLE_A = 7;
-    let REG_INPUT_DISABLE_B = 6;
+    let isInitalized = false;
 
     let keyPressed = false;
     let mouseClicked = false;
@@ -100,6 +99,7 @@ namespace MakeyMakey {
             NumberFormat.UInt16BE,
             false
         )
+        isInitalized = true;
     }
 
     function sx1509_reset() {
@@ -354,10 +354,10 @@ namespace MakeyMakey {
     // Background loop checking for pin input
     control.inBackground(() => {
 
-        let prevKeyPressedState = true;
-        let prevMouseClickedState = true;
+        let prevKeyPressedState = false;
+        let prevMouseClickedState = false;
 
-        while (true) {
+        while (true && isInitalized) {
             //setForInput()
             keyPressed = sx1509_digitalRead(14) === 1;
             mouseClicked = sx1509_digitalRead(15) === 1;
