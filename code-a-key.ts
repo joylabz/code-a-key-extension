@@ -305,11 +305,11 @@ namespace MakeyMakey {
     }
 
     //%group="Mouse"
-    //% block="move mouse %direction|for %seconds|seconds"
-    //% seconds.shadow=timePicker
-    export function moveMouseForSeconds(direction: MouseDirections, seconds: number): void {
+    //% block="move mouse %direction|for %ms|ms"
+    //% ms.shadow=timePicker
+    export function moveMouseForMilliseconds(direction: MouseDirections, ms: number): void {
         moveMouse(direction);
-        basic.pause(seconds);
+        basic.pause(ms);
         stopMouse(direction);
         basic.pause(DEBOUNCE_TIME);
     }
