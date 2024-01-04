@@ -50,7 +50,7 @@ enum MouseButtons {
 //% groups=['Keyboard', 'Mouse', 'Events', 'Advanced']
 //% weight=100 color=#f50019 icon="\uf11c" block="Makey Makey"
 namespace MakeyMakey {
-    
+
     let DEBOUNCE_TIME = 50
 
     let SX1509_ADDRESS = 0
@@ -61,7 +61,6 @@ namespace MakeyMakey {
     let REG_DIR_B = 14
     let REG_DATA_A = 17
     let REG_DATA_B = 16
-    let isInitalized = false;
 
     let keyPressed = false;
     let mouseClicked = false;
@@ -110,7 +109,50 @@ namespace MakeyMakey {
             NumberFormat.UInt16BE,
             false
         )
-        isInitalized = true;
+        // Background loop checking for pin input
+        control.inBackground(() => {
+
+            let prevKeyPressedState = false;
+            let prevMouseClickedState = false;
+
+            while (true) {
+                //setForInput()
+                keyPressed = sx1509_digitalRead(14) === 1;
+                mouseClicked = sx1509_digitalRead(15) === 1;
+                //  setForOutput()
+                //console.log(`keyPressed: ${keyPressed}`);
+
+                if (!prevKeyPressedState && keyPressed && onKeyPressedHandler) {
+                    onKeyPressedHandler();
+                }
+
+                if (!prevMouseClickedState && mouseClicked && onMouseClickedHandler) {
+                    onMouseClickedHandler();
+                }
+
+                if (!prevKeyPressedState && !prevMouseClickedState && keyPressed && mouseClicked && bothPressedHandler) {
+                    bothPressedHandler();
+                }
+
+                if ((prevKeyPressedState || prevMouseClickedState) && !keyPressed && !mouseClicked && allReleasedHandler) {
+                    allReleasedHandler();
+                }
+
+                if (prevKeyPressedState && !keyPressed && onKeyReleasedHandler) {
+                    onKeyReleasedHandler();
+                }
+
+                if (prevMouseClickedState && !mouseClicked && onMouseReleasedHandler) {
+                    onMouseReleasedHandler();
+                }
+
+
+                prevKeyPressedState = keyPressed;
+                prevMouseClickedState = mouseClicked;
+
+                basic.pause(20)
+            }
+        });
     }
 
     function sx1509_digitalWrite(pin: number, state: boolean) {
@@ -339,51 +381,5 @@ namespace MakeyMakey {
         let data = (1 << (pin % 8));
         return (currentValue & data) > 0 ? 1 : 0;
     }
-
-
-    // Background loop checking for pin input
-    control.inBackground(() => {
-
-        let prevKeyPressedState = false;
-        let prevMouseClickedState = false;
-
-        while (true && isInitalized) {
-            //setForInput()
-            keyPressed = sx1509_digitalRead(14) === 1;
-            mouseClicked = sx1509_digitalRead(15) === 1;
-            //  setForOutput()
-            //console.log(`keyPressed: ${keyPressed}`);
-
-            if (!prevKeyPressedState && keyPressed && onKeyPressedHandler) {
-                onKeyPressedHandler();
-            }
-
-            if (!prevMouseClickedState && mouseClicked && onMouseClickedHandler) {
-                onMouseClickedHandler();
-            }
-
-            if (!prevKeyPressedState && !prevMouseClickedState && keyPressed && mouseClicked && bothPressedHandler) {
-                bothPressedHandler();
-            }
-
-            if (prevKeyPressedState && prevMouseClickedState && !keyPressed && !mouseClicked && allReleasedHandler) {
-                allReleasedHandler();
-            }
-
-            if (prevKeyPressedState && !keyPressed && onKeyReleasedHandler) {
-                onKeyReleasedHandler();
-            }
-
-            if (prevMouseClickedState && !mouseClicked && onMouseReleasedHandler) {
-                onMouseReleasedHandler();
-            }
-
-
-            prevKeyPressedState = keyPressed;
-            prevMouseClickedState = mouseClicked;
-
-            basic.pause(20)
-        }
-    });
 
 }
