@@ -208,8 +208,7 @@ namespace MakeyMakey {
     }
 
     //%group="Keyboard"
-    //% weight=100
-    //% advanced=true
+    //% weight=20
     //% block="press key %key"
     export function pressKey(key: KeyPress): void {
         sx1509_digitalWrite(key, false);
@@ -224,8 +223,7 @@ namespace MakeyMakey {
     }
 
     //%group="Keyboard"
-    //% weight=90
-    //% advanced=true
+    //% weight=10
     //% block="release key %key"
     export function release(key: KeyRelease): void {
         if (key === KeyRelease.ALL) {
@@ -281,15 +279,13 @@ namespace MakeyMakey {
         sx1509_digitalWrite(direction, true);
     }
     //%group="Mouse"
-    //% weight=200
-    //% advanced=true
+    //% weight=20
     //% block="press mouse button %button"
     export function pressMouseButton(button: MouseButtons): void {
         sx1509_digitalWrite(button, false);
     }
     //%group="Mouse"
-    //% weight=150
-    //% advanced=true
+    //% weight=10
     //% block="release mouse button %button"
     export function releaseMouseButton(button: MouseButtons): void {
         sx1509_digitalWrite(button, true);
