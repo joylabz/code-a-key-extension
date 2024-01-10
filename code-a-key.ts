@@ -379,7 +379,7 @@ namespace makeyMakey {
      * Sets the debounce time for key and mouse events.
      * @param ms the debounce time in milliseconds
      */
-    //% blockId="makeymakey_set_debounce" block="set debounce %ms"
+    //% blockId="makeymakey_set_debounce" block="set debounce %ms ms"
     //% advanced=true
     //% group="Advanced"
     //% weight=0
