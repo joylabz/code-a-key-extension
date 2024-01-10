@@ -88,7 +88,7 @@ namespace MakeyMakey {
 
     //% blockId="makeymakey_init" block="initialize Makey Makey"
     /**
-     * Initialize the Makey Makey
+     * Initializes the Makey Makey code-a-key backpack.  This must be called before any other Makey Makey blocks will work.
      */
 
     export function sx1509_init() {
@@ -197,10 +197,14 @@ namespace MakeyMakey {
             false
         )
     }
-
+    /**
+     * Presses and releases a specified key.
+     * @param key the key to press and release
+     */
+    //% blockId="makeymakey_press_release_key" block="press and release key %key"   
     //%group="Keyboard"
     //% weight=100
-    //% block="press and release key %key"
+    
     export function typeKey(key: KeyPress): void {
         pressKey(key);
         basic.pause(DEBOUNCE_TIME);
@@ -226,25 +230,35 @@ namespace MakeyMakey {
         }
         basic.pause(DEBOUNCE_TIME);
     }
-
+    /**
+     * Presses a specified key.
+     * @param key the key to press
+     */
+    //% blockId="makeymakey_press_key" block="press key %key"
     //%group="Keyboard"
     //% weight=20
-    //% block="press key %key"
     export function pressKey(key: KeyPress): void {
         sx1509_digitalWrite(key, false);
     }
 
+    /**
+     * Checks if any key on the Makey Makey is currently pressed.
+     */
+    //% blockId="makeymakey_any_key_pressed" block="any Makey Makey key pressed"    
     //%group="Keyboard"
     //% advanced=true
     //% weight=0
-    //% block="any Makey Makey key pressed"
     export function anyKeyPressed(): boolean {
         return keyPressed;
     }
 
+    /**
+     * Releases a specified key.
+     * @param key the key to release
+     */
+    //% blockId="makeymakey_release_key" block="release key %key"
     //%group="Keyboard"
     //% weight=10
-    //% block="release key %key"
     export function release(key: KeyRelease): void {
         if (key === KeyRelease.ALL) {
             for (let i = 8; i < 14; i++) {
@@ -274,45 +288,70 @@ namespace MakeyMakey {
         }
     }
 
+    /**
+     * Begins moving the mouse in the specified direction.
+     * @param direction the direction in which to move the mouse
+     */
+    //% blockId="makeymakey_move_mouse" block="begin moving mouse %direction"
     //%group="Mouse"
     //% weight=100
     //% advanced=true
-    //% block="begin moving mouse %direction"
     export function moveMouse(direction: MouseDirections): void {
         sx1509_digitalWrite(direction, false);
     }
 
-    //reporter function for the mouseClicked boolean state
+    /**
+     * Checks if any Makey Makey mouse button is currently pressed.
+     */
+    //% blockId="makeymakey_any_mouse_clicked" block="any Makey Makey mouse button pressed"
     //%group="Mouse"
     //% weight=0
     //% advanced=true
-    //% block="any Makey Makey mouse button pressed"
     export function anyMouseClicked(): boolean {
         return mouseClicked;
     }
 
+    /**
+     * Stops the mouse from moving in the specified direction.
+     * @param direction the direction in which to stop the mouse
+     */
+    //% blockId="makeymakey_stop_mouse" block="stop mouse %direction"
     //%group="Mouse"
     //% weight=90
     //% advanced=true
-    //% block="stop mouse %direction"
     export function stopMouse(direction: MouseDirections): void {
         sx1509_digitalWrite(direction, true);
     }
+
+    /**
+     * Presses a specified mouse button.
+     * @param button the mouse button to press
+     */
+    //% blockId="makeymakey_press_mouse_button" block="press mouse button %button"
     //%group="Mouse"
     //% weight=20
-    //% block="press mouse button %button"
     export function pressMouseButton(button: MouseButtons): void {
         sx1509_digitalWrite(button, false);
     }
+
+    /**
+     * Releases a specified mouse button.
+     * @param button the mouse button to release
+     */
+    //% blockId="makeymakey_release_mouse_button" block="release mouse button %button"
     //%group="Mouse"
     //% weight=10
-    //% block="release mouse button %button"
     export function releaseMouseButton(button: MouseButtons): void {
         sx1509_digitalWrite(button, true);
     }
+
+    /**
+     * Simulates a click of a specified mouse button.
+     * @param button the mouse button to click
+     */
+    //% blockId="makeymakey_click_mouse_button" block="click mouse button %button"
     //%group="Mouse"
     //% weight=100
-    //% block="click mouse button %button"
     export function clickMouse(button: MouseButtons): void {
         pressMouseButton(button);
         basic.pause(DEBOUNCE_TIME);
@@ -320,8 +359,13 @@ namespace MakeyMakey {
         basic.pause(DEBOUNCE_TIME);
     }
 
+    /**
+     * Moves the mouse in a specified direction for a certain amount of time.
+     * @param direction the direction to move the mouse
+     * @param ms the duration in milliseconds to move the mouse
+     */
+    //% blockId="makeymakey_move_mouse_for_ms" block="move mouse %direction|for %ms|ms"
     //%group="Mouse"
-    //% block="move mouse %direction|for %ms|ms"
     //% ms.shadow=timePicker
     export function moveMouseForMilliseconds(direction: MouseDirections, ms: number): void {
         moveMouse(direction);
