@@ -17,6 +17,7 @@ enum MakeyMakeyReleaseEventTypes {
 }
 
 enum KeyPress {
+    //% block="w"
     W = 13,
     A = 12,
     S = 11,
@@ -67,7 +68,7 @@ namespace MakeyMakey {
 
 
 
-    //% block="Initialize MakeyMakey"
+    //% block="initialize MakeyMakey"
     export function sx1509_init() {
         REG_RESET = 125
         pins.i2cWriteNumber(
@@ -109,6 +110,7 @@ namespace MakeyMakey {
             NumberFormat.UInt16BE,
             false
         )
+
         // Background loop checking for pin input
         control.inBackground(() => {
 
@@ -116,12 +118,8 @@ namespace MakeyMakey {
             let prevMouseClickedState = false;
 
             while (true) {
-                //setForInput()
                 keyPressed = sx1509_digitalRead(14) === 1;
                 mouseClicked = sx1509_digitalRead(15) === 1;
-                //  setForOutput()
-                //console.log(`keyPressed: ${keyPressed}`);
-
                 if (!prevKeyPressedState && keyPressed && onKeyPressedHandler) {
                     onKeyPressedHandler();
                 }

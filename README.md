@@ -1,78 +1,157 @@
 # Makey Makey Code-a-Key MakeCode Package
 
-This is an extension which allows you to use the [Makey Makey](https://www.makeymakey.com) with the micro:bit through the [Code-a-Key backpack](https://www.makeymakey.com).  The Code-a-Key backpack allows you to:
-
-* Program the micro:bit to send keyboard and mouse input to a computer through the attached Makey Makey
-* Program the micro:bit to respond to *key presses* and *mouse clicks* triggerd by the Makey Makey
+This extension integrates the [Makey Makey](https://www.makeymakey.com) with the micro:bit through the [Code-a-Key backpack](https://makeymakey.com/products/code-a-key-backpack). It allows you to program the micro:bit for keyboard and mouse interactions, responding to key presses and mouse clicks from the Makey Makey.
 
 ## Basic Blocks
 
-![Initialize Makey Makey block](./block-images/initialize.png)
+### Initialize Makey Makey
+The `initialize Makey Makey` block is essential and should be placed at the start of your `On Start` event block.
 
-This block initializes the Code-a-Key backpack and the Makey Makey and *must be used* before any of the other blocks will work.  You will almost always put this at the top of your `On Start` event block.
+```blocks
+// initialize Makey Makey block
+MakeyMakey.sx1509_init()
+```
 
-![Press and Release Key block](./block-images/press-and-release-key.png)
+### Press and Release Key
+Simulates a key press and release sequence with an adjustable delay.
 
-This block causes the Makey Makey to trigger a key-press of the selected key followed by a key-release with a brief delay between them.  When you type a key on the keyboard it sends 2 events to the computer:
-* key *press* when you press the key down  
-* key *release* when you let the key come bakc up. 
+```blocks
+// press and release Key block
+MakeyMakey.typeKey(KeyPress.W)
+```
+### Press Key
+Holds a key down until released.
 
-This block combines both of these events in one block for ease of use.
+```blocks
+// press key block
+MakeyMakey.pressKey(KeyPress.W)
+```
 
-By default the delay between press and release will be 50ms but it can be adjusted using the `Set Debounce` block in the *advanced* section.
+### Release Key
+Releases a key that was held down.
 
-![When Key Pressed block](./block-images/when-key-pressed.png)
+```blocks
+// release key block
+MakeyMakey.release(KeyRelease.W)
+```
+### When Makey Makey Key Pressed
+Triggers an event when the Makey Makey sends any key press to the computer.
 
-This is an *event* block that is triggered whenever the Makey Makey sends a key-press to the computer.  This block cannot distinguish between different Makey Makey keys and triggers for all of them.
+```blocks
+// when key pressed block
+MakeyMakey.whenKeyPressed(() => {
+  // Code to execute when a key is pressed
+})
+```
 
-![Click Mouse Button block](./block-images/click-mouse-button.png)
-This block causes the Makey Makey to trigger a mouse-click of the selected mouse-button.  A mouse-click consists of two distinct events with a brief delay between them.
-* a mouse *down* event when you press the mouse button
-* a mouse *up* event when you release the mouse button
+### Click Mouse Button
+Mimics a mouse click, consisting of a mouse down and up event.
 
-This block combines both of these events in one block for ease of use.
+```blocks
+// click mouse button block
+MakeyMakey.clickMouse(MouseButtons.LEFT)
+```
 
-By default the delay between press and release will be 50ms but it can be adjusted using the `Set Debounce` block in the *advanced* section.
+### Move Mouse for Milliseconds
+Moves the mouse cursor in a specified direction for a set duration.
 
-![Move Mouse for seconds block](./block-images/move-mouse.png)
+```blocks
+// move mouse for ms block
+MakeyMakey.moveMouseForMilliseconds(MouseDirections.UP, 1000)
+```
 
-This block causes the Makey Makey to move the mouse-cursor in the selected direction for the chosen amount of time.  This block will cause code execution to stop during the mouse-movement.
+### When Makey Makey Mouse clicked
+Triggers an event when the Makey Makey sends a left or right mouse click to the computer.
 
-![When Makey Makey Mouse clicked block](./block-images/when-mouse-clicked.png)
-
-This is an *event* block that is triggered whenever the Makey Makey sends a mouse-click to the computer.  This block cannot distinguish between the LEFT and RIGHT mouse buttons and triggers for both of them.
+```blocks
+// when makey makey mouse clicked block
+MakeyMakey.whenMouseClicked(() => {
+  // Code to execute when a mouse button is clicked
+})
+```
 
 ## Advanced Blocks
-The following blocks are in the *...more* section of the extension.  They allow you to trigger pressing and releasing keys and mouse-buttons separately.  This allows you to write code that holds buttons down, triggers more than one key press at a time, and other more elaborate behaviors.
+These blocks offer more control over key and mouse button presses, allowing for complex behaviors.
 
-![Press Key block](./block-images/press-key.png)
+### Press Mouse Button
+Holds down a mouse button until released.
 
-This block causes the Makey Makey to press *and hold down* a key.  The key will be held down until it is *released* with a `Release Key` block.
+```blocks
+// press mouse button block
+MakeyMakey.pressMouseButton(MouseButtons.LEFT)
+```
 
-![Release Key block](./block-images/release-key.png)
+### Release Mouse Button
+Releases a mouse button that was held down.
 
-This block causes the Makey Makey to release a key.  This will stop the key that was triggered from a `Press Key` block from being *held down*.
+```blocks
+// release mouse button block
+MakeyMakey.releaseMouseButton(MouseButtons.LEFT)
+```
 
-![Press Mouse Button block](./block-images/press-mouse-button.png)
+### Begin Moving Mouse
+Starts moving the mouse in a given direction.
 
-This block causes the Makey Makey to press *and hold down* a mouse button.  The mouse button will be held down until it is *released* with a `Release Mouse Button` block.
+```blocks
+// begin moving mouse block
+MakeyMakey.moveMouse(MouseDirections.UP)
+```
 
-![Release Mouse Button block](./block-images/release-mouse-button.png)
+### Stop Mouse
+Stops the mouse from moving in a given direction.
 
-This block causes the Makey Makey to release a mouse button.  This will stop the key that was triggered from a `Press Mouse Button` block from being *held down*.
+```blocks
+// stop mouse block
+MakeyMakey.stopMouse(MouseDirections.UP)
+```
 
-![Begin Moving Mouse block](./block-images/begin-moving-mouse.png)
+### Set Debounce
+Adjusts the debounce timing for press-and-release and click actions.
 
-This block causes the Makey Makey to start moving the mouse in the given direction.  The mouse will continue to move in that direction until it is stopped by  a `Stop Mouse` block.
+```blocks
+// set debounce block
+MakeyMakey.setDebounce(100)
+```
 
-![Stop Mouse block](./block-images/stop-mouse.png)
+### When All Makey Makey Keys or Mouse Buttons Released
+Executes code when the Makey Makey transitions from having _any_ keys and/or mouse buttons pressed to _zero_ keys and/or mouse buttons pressed.
 
-This block causes the Makey Makey to stop moving the mouse in the given direction.
+```blocks
+// when all makey makey released block
+MakeyMakey.onReleaseEvent(MakeyMakeyReleaseEventTypes.AllReleased, () => {
+    // Code to execute when all keys and/or mouse buttons are released
+})
+```
+### When Makey Makey Keys or Mouse Buttons Pressed
+Executes code when the Makey Makey transitions from having _zero_ keys and/or mouse buttons pressed to _any_ keys and/or mouse buttons pressed.
 
-![Set Debounce block](./block-images/set-debounce.png)
+```blocks
+// when Makey Makey pressed block
+MakeyMakey.onReleaseEvent(MakeyMakeyReleaseEventTypes.AllReleased, () => {
+    // Code to execute when any keys and/or mouse buttons are pressed
+})
+```
 
-This block sets the *debounce* timing for the `press-and-release` and `click` blocks.  In order for these blocks to function they must have a small delay between when they trigger the `press` event and when they trigger the `release` event in order for the computer to recognize that these events occurred.
+### Set Debounce Time
+Configures the debounce time for key and mouse events.
 
-This delay is called the _debounce_ time.  If the _debounce_ time is too low, the key will be _pressed_ and then _released_ before the computer notices that it was ever pressed.  If the _debounce_ time is too high, there will be a noticeable lag in the `Press and Release` and `Click Mouse Button` blocks.  
+```blocks
+// Set Debounce Time block
+MakeyMakey.setDebounce(100) // Set the debounce time in milliseconds
+```
 
-The default _debounce_ time is 50ms and should be suitable for the vast majority of hardware configuration and use-cases.
+### Any Key Pressed
+Checks if any Makey Makey key is currently pressed.
+
+```blocks
+// Any Key Pressed block
+let isAnyKeyPressed = MakeyMakey.anyKeyPressed()
+```
+
+### Any Mouse Button Pressed
+Checks if any Makey Makey mouse button is currently pressed.
+
+```blocks
+// Any Mouse Button Pressed block
+let isAnyMouseButtonPressed = MakeyMakey.anyMouseClicked()
+```
