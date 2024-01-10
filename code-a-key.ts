@@ -204,7 +204,7 @@ namespace MakeyMakey {
     //% blockId="makeymakey_press_release_key" block="press and release key %key"   
     //%group="Keyboard"
     //% weight=100
-    
+
     export function typeKey(key: KeyPress): void {
         pressKey(key);
         basic.pause(DEBOUNCE_TIME);
@@ -373,10 +373,15 @@ namespace MakeyMakey {
         stopMouse(direction);
         basic.pause(DEBOUNCE_TIME);
     }
+
+    /**
+     * Sets the debounce time for key and mouse events.
+     * @param ms the debounce time in milliseconds
+     */
+    //% blockId="makeymakey_set_debounce" block="set debounce %ms"
     //% advanced=true
     //% group="Advanced"
     //% weight=0
-    //% block="set debounce %ms"
     export function setDebounce(ms: number): void {
         DEBOUNCE_TIME = ms;
     }
@@ -390,7 +395,12 @@ namespace MakeyMakey {
     let onMouseReleasedHandler: () => void;
     let allReleasedHandler: () => void;
 
-    //% block="when Makey Makey %event"
+    /**
+    * Event handler for when a  Makey Makey key or mouse press event occurs.
+    * @param event the Makey Makey event type
+    * @param handler the function to call when the event happens
+    */
+    //% blockId="makeymakey_on_press_event" block="when Makey Makey %event"
     //% group="Events"
     //% weight=0
     export function onPressEvent(event: MakeyMakeyPressEventTypes, handler: () => void): void {
@@ -403,7 +413,12 @@ namespace MakeyMakey {
         }
     }
 
-    //% block="when all Makey Makey %event"
+    /**
+     * Event handler for when all specified Makey Makey keys and mouse buttons are released.
+     * @param event the Makey Makey release event type
+     * @param handler the function to call when all specified keys and mouse buttons are released
+     */
+    //% blockId="makeymakey_on_release_event" block="when all Makey Makey %event"
     //% group="Events"
     //% advanced=true
     //% weight=0
@@ -415,18 +430,6 @@ namespace MakeyMakey {
         } else if (event === MakeyMakeyReleaseEventTypes.AllReleased) {
             allReleasedHandler = handler;
         }
-    }
-
-    //% block="when Makey Makey key pressed"
-    //%group="Keyboard"
-    export function whenKeyPressed(handler: () => void): void {
-        onKeyPressedHandler = handler;
-    }
-    //%group="Mouse"
-    //% weight=0
-    //% block="when Makey Makey mouse clicked"
-    export function whenMouseClicked(handler: () => void): void {
-        onMouseClickedHandler = handler;
     }
 
     function sx1509_digitalRead(pin: number): number {
