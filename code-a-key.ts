@@ -1,75 +1,75 @@
-enum MakeyMakeyPressEventTypes {
-    //% block="key pressed"
-    KeyPressed = 1,
-    //% block="mouse clicked"
-    MouseClicked = 2,
-    //% block="key pressed+mouse clicked"
-    BothPressed = 3
-}
 
-enum MakeyMakeyReleaseEventTypes {
-    //% block="keys released"
-    KeyReleased = 1,
-    //% block="mouse buttons released"
-    MouseReleased = 2,
-    //% block="keys+mouse buttons released"
-    AllReleased = 3
-}
-
-enum KeyPress {
-    //% block="w"
-    W = 13,
-    //% block="a"
-    A = 12,
-    //% block="s"
-    S = 11,
-    //% block="d"
-    D = 10,
-    //% block="f"
-    F = 9,
-    //% block="g"
-    G = 8,
-}
-
-enum KeyRelease {
-    //% block="w"
-    W = 13,
-    //% block="a"
-    A = 12,
-    //% block="s"
-    S = 11,
-    //% block="d"
-    D = 10,
-    //% block="f"
-    F = 9,
-    //% block="g"
-    G = 8,
-    //% block="all"
-    ALL = 0
-}
-
-enum MouseDirections {
-    //% block="up"
-    UP = 0,
-    //% block="down"
-    DOWN = 1,
-    //% block="left"
-    LEFT = 2,
-    //% block="right"
-    RIGHT = 3
-}
-
-enum MouseButtons {
-    //% block="left"
-    LEFT = 4,
-    //% block="right"
-    RIGHT = 5
-}
 
 //% groups=['Keyboard', 'Mouse', 'Events', 'Advanced']
 //% weight=100 color=#f50019 icon="\uf11c" block="Makey Makey"
 namespace MakeyMakey {
-
+    export enum MakeyMakeyPressEventTypes {
+        //% block="key pressed"
+        KeyPressed = 1,
+        //% block="mouse clicked"
+        MouseClicked = 2,
+        //% block="key pressed+mouse clicked"
+        BothPressed = 3
+    }
+    
+    export enum MakeyMakeyReleaseEventTypes {
+        //% block="keys released"
+        KeyReleased = 1,
+        //% block="mouse buttons released"
+        MouseReleased = 2,
+        //% block="keys+mouse buttons released"
+        AllReleased = 3
+    }
+    
+    export enum KeyPress {
+        //% block="w"
+        W = 13,
+        //% block="a"
+        A = 12,
+        //% block="s"
+        S = 11,
+        //% block="d"
+        D = 10,
+        //% block="f"
+        F = 9,
+        //% block="g"
+        G = 8,
+    }
+    
+    export enum KeyRelease {
+        //% block="w"
+        W = 13,
+        //% block="a"
+        A = 12,
+        //% block="s"
+        S = 11,
+        //% block="d"
+        D = 10,
+        //% block="f"
+        F = 9,
+        //% block="g"
+        G = 8,
+        //% block="all"
+        ALL = 0
+    }
+    
+    export enum MouseDirections {
+        //% block="up"
+        UP = 0,
+        //% block="down"
+        DOWN = 1,
+        //% block="left"
+        LEFT = 2,
+        //% block="right"
+        RIGHT = 3
+    }
+    
+    export enum MouseButtons {
+        //% block="left"
+        LEFT = 4,
+        //% block="right"
+        RIGHT = 5
+    }
     let DEBOUNCE_TIME = 50
 
     let SX1509_ADDRESS = 0
@@ -205,27 +205,27 @@ namespace MakeyMakey {
     //%group="Keyboard"
     //% weight=100
 
-    export function typeKey(key: KeyPress): void {
+    export function typeKey(key: MakeyMakey.KeyPress): void {
         pressKey(key);
         basic.pause(DEBOUNCE_TIME);
         switch (key) {
-            case KeyPress.W:
-                release(KeyRelease.W);
+            case MakeyMakey.KeyPress.W:
+                release(MakeyMakey.KeyRelease.W);
                 break;
-            case KeyPress.A:
-                release(KeyRelease.A);
+            case MakeyMakey.KeyPress.A:
+                release(MakeyMakey.KeyRelease.A);
                 break;
-            case KeyPress.S:
-                release(KeyRelease.S);
+            case MakeyMakey.KeyPress.S:
+                release(MakeyMakey.KeyRelease.S);
                 break;
-            case KeyPress.D:
-                release(KeyRelease.D);
+            case MakeyMakey.KeyPress.D:
+                release(MakeyMakey.KeyRelease.D);
                 break;
-            case KeyPress.F:
-                release(KeyRelease.F);
+            case MakeyMakey.KeyPress.F:
+                release(MakeyMakey.KeyRelease.F);
                 break;
-            case KeyPress.G:
-                release(KeyRelease.G);
+            case MakeyMakey.KeyPress.G:
+                release(MakeyMakey.KeyRelease.G);
                 break;
         }
         basic.pause(DEBOUNCE_TIME);
@@ -237,7 +237,7 @@ namespace MakeyMakey {
     //% blockId="makeymakey_press_key" block="press key %key"
     //%group="Keyboard"
     //% weight=20
-    export function pressKey(key: KeyPress): void {
+    export function pressKey(key: MakeyMakey.KeyPress): void {
         sx1509_digitalWrite(key, false);
     }
 
@@ -259,30 +259,30 @@ namespace MakeyMakey {
     //% blockId="makeymakey_release_key" block="release key %key"
     //%group="Keyboard"
     //% weight=10
-    export function release(key: KeyRelease): void {
-        if (key === KeyRelease.ALL) {
+    export function release(key: MakeyMakey.KeyRelease): void {
+        if (key === MakeyMakey.KeyRelease.ALL) {
             for (let i = 8; i < 14; i++) {
                 sx1509_digitalWrite(i, true);
             }
         } else {
             switch (key) {
-                case KeyRelease.W:
-                    sx1509_digitalWrite(KeyPress.W, true);
+                case MakeyMakey.KeyRelease.W:
+                    sx1509_digitalWrite(MakeyMakey.KeyPress.W, true);
                     break;
-                case KeyRelease.A:
-                    sx1509_digitalWrite(KeyPress.A, true);
+                case MakeyMakey.KeyRelease.A:
+                    sx1509_digitalWrite(MakeyMakey.KeyPress.A, true);
                     break;
-                case KeyRelease.S:
-                    sx1509_digitalWrite(KeyPress.S, true);
+                case MakeyMakey.KeyRelease.S:
+                    sx1509_digitalWrite(MakeyMakey.KeyPress.S, true);
                     break;
-                case KeyRelease.D:
-                    sx1509_digitalWrite(KeyPress.D, true);
+                case MakeyMakey.KeyRelease.D:
+                    sx1509_digitalWrite(MakeyMakey.KeyPress.D, true);
                     break;
-                case KeyRelease.F:
-                    sx1509_digitalWrite(KeyPress.F, true);
+                case MakeyMakey.KeyRelease.F:
+                    sx1509_digitalWrite(MakeyMakey.KeyPress.F, true);
                     break;
-                case KeyRelease.G:
-                    sx1509_digitalWrite(KeyPress.G, true);
+                case MakeyMakey.KeyRelease.G:
+                    sx1509_digitalWrite(MakeyMakey.KeyPress.G, true);
                     break;
             }
         }
@@ -296,7 +296,7 @@ namespace MakeyMakey {
     //%group="Mouse"
     //% weight=100
     //% advanced=true
-    export function moveMouse(direction: MouseDirections): void {
+    export function moveMouse(direction: MakeyMakey.MouseDirections): void {
         sx1509_digitalWrite(direction, false);
     }
 
@@ -319,7 +319,7 @@ namespace MakeyMakey {
     //%group="Mouse"
     //% weight=90
     //% advanced=true
-    export function stopMouse(direction: MouseDirections): void {
+    export function stopMouse(direction: MakeyMakey.MouseDirections): void {
         sx1509_digitalWrite(direction, true);
     }
 
@@ -330,7 +330,7 @@ namespace MakeyMakey {
     //% blockId="makeymakey_press_mouse_button" block="press mouse button %button"
     //%group="Mouse"
     //% weight=20
-    export function pressMouseButton(button: MouseButtons): void {
+    export function pressMouseButton(button: MakeyMakey.MouseButtons): void {
         sx1509_digitalWrite(button, false);
     }
 
@@ -341,7 +341,7 @@ namespace MakeyMakey {
     //% blockId="makeymakey_release_mouse_button" block="release mouse button %button"
     //%group="Mouse"
     //% weight=10
-    export function releaseMouseButton(button: MouseButtons): void {
+    export function releaseMouseButton(button: MakeyMakey.MouseButtons): void {
         sx1509_digitalWrite(button, true);
     }
 
@@ -352,7 +352,7 @@ namespace MakeyMakey {
     //% blockId="makeymakey_click_mouse_button" block="click mouse button %button"
     //%group="Mouse"
     //% weight=100
-    export function clickMouse(button: MouseButtons): void {
+    export function clickMouse(button: MakeyMakey.MouseButtons): void {
         pressMouseButton(button);
         basic.pause(DEBOUNCE_TIME);
         releaseMouseButton(button);
@@ -367,7 +367,7 @@ namespace MakeyMakey {
     //% blockId="makeymakey_move_mouse_for_ms" block="move mouse %direction|for %ms|ms"
     //%group="Mouse"
     //% ms.shadow=timePicker
-    export function moveMouseForMilliseconds(direction: MouseDirections, ms: number): void {
+    export function moveMouseForMilliseconds(direction: MakeyMakey.MouseDirections, ms: number): void {
         moveMouse(direction);
         basic.pause(ms);
         stopMouse(direction);
@@ -403,12 +403,12 @@ namespace MakeyMakey {
     //% blockId="makeymakey_on_press_event" block="when Makey Makey %event"
     //% group="Events"
     //% weight=0
-    export function onPressEvent(event: MakeyMakeyPressEventTypes, handler: () => void): void {
-        if (event === MakeyMakeyPressEventTypes.KeyPressed) {
+    export function onPressEvent(event: MakeyMakey.MakeyMakeyPressEventTypes, handler: () => void): void {
+        if (event === MakeyMakey.MakeyMakeyPressEventTypes.KeyPressed) {
             onKeyPressedHandler = handler;
-        } else if (event === MakeyMakeyPressEventTypes.MouseClicked) {
+        } else if (event === MakeyMakey.MakeyMakeyPressEventTypes.MouseClicked) {
             onMouseClickedHandler = handler;
-        } else if (event === MakeyMakeyPressEventTypes.BothPressed) {
+        } else if (event === MakeyMakey.MakeyMakeyPressEventTypes.BothPressed) {
             bothPressedHandler = handler;
         }
     }
@@ -422,12 +422,12 @@ namespace MakeyMakey {
     //% group="Events"
     //% advanced=true
     //% weight=0
-    export function onReleaseEvent(event: MakeyMakeyReleaseEventTypes, handler: () => void): void {
-        if (event === MakeyMakeyReleaseEventTypes.KeyReleased) {
+    export function onReleaseEvent(event: MakeyMakey.MakeyMakeyReleaseEventTypes, handler: () => void): void {
+        if (event === MakeyMakey.MakeyMakeyReleaseEventTypes.KeyReleased) {
             onKeyReleasedHandler = handler;
-        } else if (event === MakeyMakeyReleaseEventTypes.MouseReleased) {
+        } else if (event === MakeyMakey.MakeyMakeyReleaseEventTypes.MouseReleased) {
             onMouseReleasedHandler = handler;
-        } else if (event === MakeyMakeyReleaseEventTypes.AllReleased) {
+        } else if (event === MakeyMakey.MakeyMakeyReleaseEventTypes.AllReleased) {
             allReleasedHandler = handler;
         }
     }
