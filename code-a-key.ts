@@ -19,32 +19,50 @@ enum MakeyMakeyReleaseEventTypes {
 enum KeyPress {
     //% block="w"
     W = 13,
+    //% block="a"
     A = 12,
+    //% block="s"
     S = 11,
+    //% block="d"
     D = 10,
+    //% block="f"
     F = 9,
+    //% block="g"
     G = 8,
 }
 
 enum KeyRelease {
+    //% block="w"
     W = 13,
+    //% block="a"
     A = 12,
+    //% block="s"
     S = 11,
+    //% block="d"
     D = 10,
+    //% block="f"
     F = 9,
+    //% block="g"
     G = 8,
+    //% block="all"
     ALL = 0
 }
 
 enum MouseDirections {
+    //% block="up"
     UP = 0,
+    //% block="down"
     DOWN = 1,
+    //% block="left"
     LEFT = 2,
+    //% block="right"
     RIGHT = 3
 }
 
 enum MouseButtons {
+    //% block="left"
     LEFT = 4,
+    //% block="right"
     RIGHT = 5
 }
 
@@ -68,7 +86,11 @@ namespace MakeyMakey {
 
 
 
-    //% block="initialize MakeyMakey"
+    //% blockId="makeymakey_init" block="initialize Makey Makey"
+    /**
+     * Initialize the Makey Makey
+     */
+
     export function sx1509_init() {
         REG_RESET = 125
         pins.i2cWriteNumber(
