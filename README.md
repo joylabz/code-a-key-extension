@@ -9,7 +9,7 @@ The `initialize Makey Makey` block is essential and should be placed at the star
 
 ```blocks
 // initialize Makey Makey block
-MakeyMakey.sx1509_init()
+MakeyMakey.sx1509Init()
 ```
 
 ### Press and Release Key

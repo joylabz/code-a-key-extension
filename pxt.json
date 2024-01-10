@@ -1,5 +1,5 @@
 {
-    "name": "Makey Makey Code-a-Key Extension",
+    "name": "makey_makey",
     "version": "1.0.0",
     "description": "An extension to allow you to use the Makey Makey Code-a-Key backpack with the BBC micro:bit",
     "license": "MIT",
@@ -14,11 +14,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "branch": "v5.0.12",
-        "tag": "v5.0.12",
-        "commits": "https://github.com/microsoft/pxt-microbit/commits/97491d6832cccab6b5bdc05b58e4c6b5dcc18cdd",
-        "target": "5.0.12",
-        "pxt": "8.0.7",
+        "target": "6.0.15",
         "targetId": "microbit"
     },
     "supportedTargets": [
