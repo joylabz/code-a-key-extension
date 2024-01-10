@@ -366,6 +366,7 @@ namespace makeyMakey {
      */
     //% blockId="makeymakey_move_mouse_for_ms" block="move mouse %direction|for %ms|ms"
     //%group="Mouse"
+    //% weight=0
     //% ms.shadow=timePicker
     export function moveMouseForMilliseconds(direction: makeyMakey.MouseDirections, ms: number): void {
         moveMouse(direction);
