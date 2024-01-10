@@ -1,5 +1,7 @@
 
-
+/**
+ * Functions for using the Makey Makey Code-a-Key backpack.
+ */
 //% groups=['Keyboard', 'Mouse', 'Events', 'Advanced']
 //% weight=100 color=#f50019 icon="\uf11c" block="Makey Makey"
 namespace makeyMakey {
