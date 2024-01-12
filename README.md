@@ -49,7 +49,7 @@ Mimics a mouse click, consisting of a mouse down and up event.
 
 ```blocks
 // click mouse button block
-MakeyMakey.clickMouse(MouseButtons.LEFT)
+MakeyMakey.clickMouse(MouseButtons.Left)
 ```
 
 ### Move Mouse for Milliseconds
@@ -57,7 +57,7 @@ Moves the mouse cursor in a specified direction for a set duration.
 
 ```blocks
 // move mouse for ms block
-MakeyMakey.moveMouseForMilliseconds(MouseDirections.UP, 1000)
+MakeyMakey.moveMouseForMilliseconds(MouseDirections.Up, 1000)
 ```
 
 ### When Makey Makey Mouse clicked
@@ -78,7 +78,7 @@ Holds down a mouse button until released.
 
 ```blocks
 // press mouse button block
-MakeyMakey.pressMouseButton(MouseButtons.LEFT)
+MakeyMakey.pressMouseButton(MouseButtons.Left)
 ```
 
 ### Release Mouse Button
@@ -86,7 +86,7 @@ Releases a mouse button that was held down.
 
 ```blocks
 // release mouse button block
-MakeyMakey.releaseMouseButton(MouseButtons.LEFT)
+MakeyMakey.releaseMouseButton(MouseButtons.Left)
 ```
 
 ### Begin Moving Mouse
@@ -94,7 +94,7 @@ Starts moving the mouse in a given direction.
 
 ```blocks
 // begin moving mouse block
-MakeyMakey.moveMouse(MouseDirections.UP)
+MakeyMakey.moveMouse(MouseDirections.Up)
 ```
 
 ### Stop Mouse
@@ -102,7 +102,7 @@ Stops the mouse from moving in a given direction.
 
 ```blocks
 // stop mouse block
-MakeyMakey.stopMouse(MouseDirections.UP)
+MakeyMakey.stopMouse(MouseDirections.Up)
 ```
 
 ### Set Debounce
