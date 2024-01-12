@@ -172,7 +172,7 @@ namespace makeyMakey {
                 prevKeyPressedState = keyPressed;
                 prevMouseClickedState = mouseClicked;
 
-                basic.pause(20)
+                basic.pause(DEBOUNCE_TIME)
             }
         });
     }
