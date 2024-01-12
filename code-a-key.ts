@@ -72,7 +72,7 @@ namespace makeyMakey {
         //% block="right"
         Right = 5
     }
-    let DEBOUNCE_TIME = 50
+    let debounceTime = 50
 
     let SX1509_ADDRESS = 0
     let REG_RESET = 0
@@ -172,7 +172,7 @@ namespace makeyMakey {
                 prevKeyPressedState = keyPressed;
                 prevMouseClickedState = mouseClicked;
 
-                basic.pause(DEBOUNCE_TIME)
+                basic.pause(debounceTime)
             }
         });
     }
@@ -209,7 +209,7 @@ namespace makeyMakey {
 
     export function typeKey(key: makeyMakey.KeyPress): void {
         pressKey(key);
-        basic.pause(DEBOUNCE_TIME);
+        basic.pause(debounceTime);
         switch (key) {
             case makeyMakey.KeyPress.W:
                 release(makeyMakey.KeyRelease.W);
@@ -230,7 +230,7 @@ namespace makeyMakey {
                 release(makeyMakey.KeyRelease.G);
                 break;
         }
-        basic.pause(DEBOUNCE_TIME);
+        basic.pause(debounceTime);
     }
     /**
      * Presses a specified key.
@@ -356,9 +356,9 @@ namespace makeyMakey {
     //% weight=100
     export function clickMouse(button: makeyMakey.MouseButtons): void {
         pressMouseButton(button);
-        basic.pause(DEBOUNCE_TIME);
+        basic.pause(debounceTime);
         releaseMouseButton(button);
-        basic.pause(DEBOUNCE_TIME);
+        basic.pause(debounceTime);
     }
 
     /**
@@ -374,7 +374,7 @@ namespace makeyMakey {
         moveMouse(direction);
         basic.pause(ms);
         stopMouse(direction);
-        basic.pause(DEBOUNCE_TIME);
+        basic.pause(debounceTime);
     }
 
     /**
@@ -386,7 +386,7 @@ namespace makeyMakey {
     //% group="Advanced"
     //% weight=0
     export function setDebounce(ms: number): void {
-        DEBOUNCE_TIME = ms;
+        debounceTime = ms;
     }
 
 
