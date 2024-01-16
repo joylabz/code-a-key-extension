@@ -72,6 +72,7 @@ namespace makeyMakey {
         //% block="right"
         Right = 5
     }
+    let pollingRate = 20
     let debounceTime = 50
 
     let SX1509_ADDRESS = 0
@@ -88,7 +89,7 @@ namespace makeyMakey {
 
 
 
-    //% blockId=makeymakey_init block="initialize Makey Makey"
+    //% block="initialize Makey Makey"
     /**
      * Initializes the Makey Makey code-a-key backpack.  This must be called before any other Makey Makey blocks will work.
      */
@@ -172,7 +173,7 @@ namespace makeyMakey {
                 prevKeyPressedState = keyPressed;
                 prevMouseClickedState = mouseClicked;
 
-                basic.pause(debounceTime)
+                basic.pause(pollingRate)
             }
         });
     }
@@ -203,7 +204,7 @@ namespace makeyMakey {
      * Presses and releases a specified key.
      * @param key the key to press and release
      */
-    //% blockId=makeymakey_press_release_key block="press and release key %key"   
+    //% block="press and release key %key"   
     //%group="Keyboard"
     //% weight=100
 
@@ -236,7 +237,7 @@ namespace makeyMakey {
      * Presses a specified key.
      * @param key the key to press
      */
-    //% blockId=makeymakey_press_key block="press key %key"
+    //% block="press key %key"
     //%group="Keyboard"
     //% weight=20
     export function pressKey(key: makeyMakey.KeyPress): void {
@@ -246,7 +247,7 @@ namespace makeyMakey {
     /**
      * Checks if any key on the Makey Makey is currently pressed.
      */
-    //% blockId=makeymakey_any_key_pressed block="any Makey Makey key pressed"    
+    //% block="any Makey Makey key pressed"    
     //%group="Keyboard"
     //% advanced=true
     //% weight=0
@@ -258,7 +259,7 @@ namespace makeyMakey {
      * Releases a specified key.
      * @param key the key to release
      */
-    //% blockId=makeymakey_release_key block="release key %key"
+    //% block="release key %key"
     //%group="Keyboard"
     //% weight=10
     export function release(key: makeyMakey.KeyRelease): void {
@@ -294,7 +295,7 @@ namespace makeyMakey {
      * Begins moving the mouse in the specified direction.
      * @param direction the direction in which to move the mouse
      */
-    //% blockId=makeymakey_move_mouse block="begin moving mouse %direction"
+    //% block="begin moving mouse %direction"
     //%group="Mouse"
     //% weight=100
     //% advanced=true
@@ -305,7 +306,7 @@ namespace makeyMakey {
     /**
      * Checks if any Makey Makey mouse button is currently pressed.
      */
-    //% blockId=makeymakey_any_mouse_clicked block="any Makey Makey mouse button pressed"
+    //% block="any Makey Makey mouse button pressed"
     //%group="Mouse"
     //% weight=0
     //% advanced=true
@@ -317,7 +318,7 @@ namespace makeyMakey {
      * Stops the mouse from moving in the specified direction.
      * @param direction the direction in which to stop the mouse
      */
-    //% blockId=makeymakey_stop_mouse block="stop mouse %direction"
+    //% block="stop mouse %direction"
     //%group="Mouse"
     //% weight=90
     //% advanced=true
@@ -329,7 +330,7 @@ namespace makeyMakey {
      * Presses a specified mouse button.
      * @param button the mouse button to press
      */
-    //% blockId=makeymakey_press_mouse_button block="press mouse button %button"
+    //% block="press mouse button %button"
     //%group="Mouse"
     //% weight=20
     export function pressMouseButton(button: makeyMakey.MouseButtons): void {
@@ -340,7 +341,7 @@ namespace makeyMakey {
      * Releases a specified mouse button.
      * @param button the mouse button to release
      */
-    //% blockId=makeymakey_release_mouse_button block="release mouse button %button"
+    //% block="release mouse button %button"
     //%group="Mouse"
     //% weight=10
     export function releaseMouseButton(button: makeyMakey.MouseButtons): void {
@@ -351,7 +352,7 @@ namespace makeyMakey {
      * Simulates a click of a specified mouse button.
      * @param button the mouse button to click
      */
-    //% blockId=makeymakey_click_mouse_button block="click mouse button %button"
+    //% block="click mouse button %button"
     //%group="Mouse"
     //% weight=100
     export function clickMouse(button: makeyMakey.MouseButtons): void {
@@ -366,7 +367,7 @@ namespace makeyMakey {
      * @param direction the direction to move the mouse
      * @param ms the duration in milliseconds to move the mouse
      */
-    //% blockId=makeymakey_move_mouse_for_ms block="move mouse %direction|for %ms|ms"
+    //% block="move mouse %direction|for %ms|ms"
     //%group="Mouse"
     //% weight=0
     //% ms.shadow=timePicker
@@ -381,13 +382,28 @@ namespace makeyMakey {
      * Sets the debounce time for key and mouse events.
      * @param ms the debounce time in milliseconds
      */
-    //% blockId=makeymakey_set_debounce block="set debounce %ms ms"
+    //% block="set debounce %ms ms"
     //% advanced=true
     //% group="Advanced"
     //% weight=0
     export function setDebounce(ms: number): void {
         debounceTime = ms;
     }
+
+    /** Sets the polling rate for the Makey Makey input event blocks.
+     * This is how often the micro:bit will check for changes in the state of the Makey Makey input pins
+     * @param ms the polling rate in milliseconds
+     * 
+     */
+    //% block="set polling rate %ms ms"
+    //% advanced=true
+    //% group="Advanced"
+    //% weight=1
+    export function setPollingRate(ms: number): void {
+        pollingRate = ms;
+    }
+
+
 
 
     // Event handlers
@@ -403,7 +419,7 @@ namespace makeyMakey {
     * @param event the Makey Makey event type
     * @param handler the function to call when the event happens
     */
-    //% blockId=makeymakey_on_press_event block="when Makey Makey %event"
+    //% block="when Makey Makey %event"
     //% group="Events"
     //% weight=0
     export function onPressEvent(event: makeyMakey.MakeyMakeyPressEventTypes, handler: () => void): void {
@@ -421,7 +437,7 @@ namespace makeyMakey {
      * @param event the Makey Makey release event type
      * @param handler the function to call when all specified keys and mouse buttons are released
      */
-    //% blockId=makeymakey_on_release_event block="when all Makey Makey %event"
+    //% block="when all Makey Makey %event"
     //% group="Events"
     //% advanced=true
     //% weight=0

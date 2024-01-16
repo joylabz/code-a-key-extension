@@ -113,6 +113,14 @@ Adjusts the debounce timing for press-and-release and click actions.
 MakeyMakey.setDebounce(100)
 ```
 
+### Set polling rate
+Sets the polling rate for the Makey Makey input event blocks.  The default rate is 20ms.
+This is how often the micro:bit will check for changes in the state of the Makey Makey input pins
+```blocks
+// set polling rate block
+MakeyMakey.setPollingRate(50)
+```
+
 ### When All Makey Makey Keys or Mouse Buttons Released
 Executes code when the Makey Makey transitions from having _any_ keys and/or mouse buttons pressed to _zero_ keys and/or mouse buttons pressed.
 
