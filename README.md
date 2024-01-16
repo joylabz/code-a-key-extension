@@ -4,7 +4,7 @@ This extension integrates the [Makey Makey](https://www.makeymakey.com) with the
 
 ## Basic Blocks
 
-### Initialize Makey Makey {#makeymakey-sx1509init}
+### Initialize Makey Makey
 The `initialize Makey Makey` block is essential and should be placed at the start of your `On Start` event block.
 
 ```blocks
